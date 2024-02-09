@@ -499,7 +499,12 @@
 		{
 			"group": "Guides",
 			"pages": [
-				"broadcasters/guides/get-started"
+				"broadcasters/guides/overview",
+				"broadcasters/guides/docker-install",
+				"broadcasters/guides/linux-install",
+				"broadcasters/guides/windows-install",
+				"broadcasters/guides/configure-broadcaster",
+				"broadcasters/guides/publish-content"
 			],
 			"version": "Broadcasters"
 		},
