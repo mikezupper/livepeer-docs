@@ -41,12 +41,12 @@ version: '3.9'
 
 services:
   broadcaster:
-    image: livepeer/go-livepeer:0.7.1
+    image: livepeer/go-livepeer:<RELEASE_VERSION>
     container_name: "broadcaster"
     hostname: "broadcaster"
     ports:
       - 1935:1935
-      - 9935:9935
+      - 8935:8935
     volumes:
       - broadcaster-lpData:/root/.lpData
     command: '-ethUrl=https://arb1.arbitrum.io/rpc/
@@ -66,7 +66,7 @@ volumes:
     external: true
 ```
 
-### Start Livepeer Broadcaster
+# Start Livepeer Broadcaster
 In this step we need to strat the Broadcaster in the foreground to create an Ethereum account for the Broadcaster.
 ```
 docker compose run -it broadcaster
@@ -77,7 +77,7 @@ After you see the message that the Ethereum account has been unlocked, quit Live
 
 
 
-### Modify Docker compose file to include eth-secret
+# Modify Docker compose file to include eth-secret
 ```
 nano docker-compose.yml
 ```
@@ -95,4 +95,4 @@ docker exec -it broadcaster /bin/bash
 livepeer_cli -host broadcaster
 ```
 
-Jump to [Configure the Livepeer Broadcaster](#configure-the-livepeer-broadcaster) to finish configuring the Broadcaster
+Jump to [Configure the Livepeer Broadcaster](/broadcasters/guides/configure-broadcaster) to finish configuring the Broadcaster

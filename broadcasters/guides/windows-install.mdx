@@ -1,7 +1,23 @@
 ---
 title: Windows Install
-description: blah bla lbah
 icon: download
 ---
 
-Hi
+Download and unzip the Livepeer binary
+
+```
+https://github.com/livepeer/go-livepeer/releases/download/<RELEASE_VERSION>/livepeer-windows-amd64.zip
+
+```
+Create a bat file to launch Livepeer.  Use the following as a template, adding your personal info and save a .bat file in the same directory as the Livepeer executable.
+
+```
+livepeer.exe -network arbitrum-one-mainnet -ethUrl=<YOUR ARB RPC> -serviceAddr=<YOUR BROADCASTER PUBLIC IP ADDRESS>:8935 -broadcaster -ethPassword=<YOUR PASSWORD>-maxPricePerUnit=300 -monitor -v=6-rtmpAddr=0.0.0.0:1935 -httpAddr=0.0.0.0:8935 -blockPollingInterval 20 
+
+PAUSE
+```
+If you'd like the Broadcaster to start with Windows you can create a System service using [NSSM](https://nssm.cc/) or the Windows Task Scheduler.
+
+Open the Livepeer CLI, then Jump to [Configure the Livepeer Broadcaster](/broadcasters/guides/configure-broadcaster) to finish configuring the Broadcaster
+```
+livepeer_cli.exe

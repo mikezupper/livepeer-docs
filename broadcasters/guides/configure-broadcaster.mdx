@@ -1,7 +1,56 @@
 ---
 title: Configure the Livepeer Broadcaster
-description: blah bla lbah
 icon: gear
 ---
 
-Hi 
+# Bridge ETH to Arbitrum
+
+In order to use the Broadcaster you need to send ETH to your Broadcaster address. **Note that Livepeer uses the Arbitrium network so you must first bridge ETH to Arbitrum from Ethereum mainnet if you do not already have ETH on Arbitrum.**
+
+If you need to bridge ETH you can use the official bridge https://bridge.arbitrum.io/ or use an exchange that supports L2 transfers.
+
+Once you have ETH on the Arbitrum network, transfer it to your newly created Broadcaster address.
+
+If not already in the Livepeer CLI, open it following the instructions above for your platform.
+
+# Fund Broadcaster
+We now need to divide the Broacaster funds into a **Deposit** and **Reserve**
+
+Choose **Option 11. Invoke "deposit broadcasting funds" (ETH)**
+
+*In this guide we are using a total of 0.1 ETH.*
+
+Enter 0.075 for the Deposit and 0.025 for the Reserve amounts when prompted.
+
+Choose **Option 1. Get node status** and confirm that the correct amounts are visible in the **BROADCASTER STATS** section.
+
+# Set Price and Default Transcoding Files 
+We will now use **Option 15. Set broadcast config** to enter the price we will pay for transcoding and choose the transcoding profiles
+
+*Below is an example.  You can modify the values to suit your needs.*
+```
+Enter a maximum transcoding price per pixel, in wei per pixels (pricePerUnit / pixelsPerUnit).
+eg. 1 wei / 10 pixels = 0,1 wei per pixel
+
+Enter amount of pixels that make up a single unit (default: 1 pixel) - > 1
+
+Enter the maximum price to pay for 1 pixels in Wei (required) - > 300
+
+Identifier      Transcoding Options
+
+0               P144p30fps16x9
+1               P240p25fps16x9
+2               P240p30fps16x9
+3               P240p30fps4x3
+4               P360p25fps16x9
+5               P360p30fps16x9
+6               P360p30fps4x3
+7               P576p25fps16x9
+8               P576p30fps16x9
+9               P720p25fps16x9
+10              P720p30fps16x9
+11              P720p30fps4x3
+12              P720p60fps16x9
+
+Enter the identifiers of the video profiles you would like to use (use a comma as the delimiter in a list of identifiers) - > 5,8,10
+```
