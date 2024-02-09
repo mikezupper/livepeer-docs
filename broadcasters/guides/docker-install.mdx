@@ -1,7 +1,98 @@
 ---
 title: Docker Install
-description: blah bla lbah
 icon: download
 ---
 
-Hi 
+# Install & Configure Docker
+
+
+If an older version of docker is installed remove it with the following command:
+
+As the root user (or sudo), run the following:
+```
+apt remove docker*
+```
+Install Docker
+```
+curl https://releases.rancher.com/install-docker/20.10.sh | sh
+```
+Create a Docker volume
+```
+docker volume create broadcaster-lpData
+```
+Create keystore directory
+```
+mkdir -p /var/lib/docker/volumes/broadcaster-lpData/_data/arbitrum-one-mainnet/keystore/
+```
+Create eth-secret file
+```
+nano -p /var/lib/docker/volumes/broadcaster-lpData/_data/eth-secret.txt
+```
+
+Enter a strong password to secure your Ethereum account and save the file.  This password is used to decrypt the keystore file and access the private key. **Make sure to never share or lose access to either the password or the keystore file.**
+
+Create Docker Compose file
+```
+nano docker-compose.yml
+```
+Copy and paste the following and save the following
+```
+version: '3.9'
+
+services:
+  broadcaster:
+    image: livepeer/go-livepeer:0.7.1
+    container_name: "broadcaster"
+    hostname: "broadcaster"
+    ports:
+      - 1935:1935
+      - 9935:9935
+    volumes:
+      - broadcaster-lpData:/root/.lpData
+    command: '-ethUrl=https://arb1.arbitrum.io/rpc/
+              -network=arbitrum-one-mainnet
+              -cliAddr=broadcaster:7935
+              -broadcaster=true
+              -monitor=true
+              -v=99
+              -blockPollingInterval=20
+              -maxPricePerUnit=300
+              -pixelsPerUnit=1
+              -rtmpAddr=0.0.0.0:1935
+              -httpAddr=0.0.0.0:8935
+              '
+volumes:
+  broadcaster-lpData:
+    external: true
+```
+
+### Start Livepeer Broadcaster
+In this step we need to strat the Broadcaster in the foreground to create an Ethereum account for the Broadcaster.
+```
+docker compose run -it broadcaster
+```
+When prompted enter the password you created for the eth-secret.txt file
+
+After you see the message that the Ethereum account has been unlocked, quit Livepeer.
+
+
+
+### Modify Docker compose file to include eth-secret
+```
+nano docker-compose.yml
+```
+Add the following command to the file and save
+```
+-ethPassword=/root/.lpData/eth-secret.txt
+```
+Start Livepeer in the background
+```
+docker compose up -d
+```
+Launch the livepeer_cli
+```
+docker exec -it broadcaster /bin/bash
+livepeer_cli -host broadcaster
+```
+
+Jump to [Configure the Livepeer Broadcaster](#configure-the-livepeer-broadcaster) to finish configuring the Broadcaster
