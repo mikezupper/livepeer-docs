@@ -500,7 +500,7 @@
 				"broadcasters/guides/windows-install",
 				"broadcasters/guides/configure-broadcaster",
 				"broadcasters/guides/publish-content",
-				"broadcasters/guides/view-content"
+				"broadcasters/guides/playback-content"
 			],
 			"version": "Broadcasters"
 		},
