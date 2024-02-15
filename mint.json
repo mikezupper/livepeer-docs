@@ -504,7 +504,8 @@
 				"broadcasters/guides/linux-install",
 				"broadcasters/guides/windows-install",
 				"broadcasters/guides/configure-broadcaster",
-				"broadcasters/guides/publish-content"
+				"broadcasters/guides/publish-content",
+				"broadcasters/guides/view-content"
 			],
 			"version": "Broadcasters"
 		},
