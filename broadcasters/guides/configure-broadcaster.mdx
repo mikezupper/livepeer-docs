@@ -18,9 +18,13 @@ We now need to divide the Broacaster funds into a **Deposit** and **Reserve**
 
 Choose **Option 11. Invoke "deposit broadcasting funds" (ETH)**
 
-*In this guide we are using a total of 0.1 ETH.*
+*In this guide we are using a total of 0.1 ETH.  This is minimum recommended and best suited for testing.*
 
-Enter 0.075 for the Deposit and 0.025 for the Reserve amounts when prompted.
+Enter 0.07 for the Deposit and 0.03 for the Reserve amounts when prompted.
+
+To calculate the ticket price your Broadcaster will pay divide the Reserve amount by 100.  In our example each payment will be 0.0003 ETH (0.03 / 100)
+
+As you pay tickets for transcoding the ticket amount paid is subtracted from your deposit amount, so make sure to monitor your deposit balance and top it off to keep your Broadcaster transcoding.
 
 Choose **Option 1. Get node status** and confirm that the correct amounts are visible in the **BROADCASTER STATS** section.
 
@@ -54,3 +58,38 @@ Identifier      Transcoding Options
 
 Enter the identifiers of the video profiles you would like to use (use a comma as the delimiter in a list of identifiers) - > 5,8,10
 ```
+To better control your encoding profiles it is recommended to use a json file to specify the resolution and bitrate for your encoding ladder.
+
+Use the following as a template for your json file
+```
+[
+{
+  "name": "480p0",
+  "fps": 0,
+  "bitrate": 1600000,
+  "width": 854,
+  "height": 480,
+  "profile": "h264constrainedhigh",
+  "gop": "1"
+},
+{
+  "name": "720p0",
+  "fps": 0,
+  "bitrate": 3000000,
+  "width": 1280,
+  "height": 720,
+  "profile": "h264constrainedhigh",
+  "gop": "1"
+},
+{
+  "name": "1080p0",
+  "fps": 0,
+  "bitrate": 6500000,
+  "width": 1920,
+  "height": 1080,
+  "profile": "h264constrainedhigh",
+  "gop": "1"
+}
+]
+```
+Save the transcodingOptions.json file in the .lpData directory
