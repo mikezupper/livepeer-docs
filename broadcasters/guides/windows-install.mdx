@@ -12,11 +12,20 @@ https://github.com/livepeer/go-livepeer/releases/download/<RELEASE_VERSION>/live
 Create a bat file to launch Livepeer.  Use the following as a template, adding your personal info and save a .bat file in the same directory as the Livepeer executable.
 
 ```
-livepeer.exe -network arbitrum-one-mainnet -ethUrl=<YOUR ARB RPC> ^
--serviceAddr=<YOUR BROADCASTER PUBLIC IP ADDRESS>:8935 -broadcaster ^
--ethPassword=<YOUR PASSWORD>-maxPricePerUnit=300 -monitor -v=6 ^
--rtmpAddr=0.0.0.0:1935 -httpAddr=0.0.0.0:8935 -blockPollingInterval 20 ^
--transcodingOptions=/usr/local/bin/lptConfig/transcodingOptions.json
+-livepeer.exe ^
+-network arbitrum-one-mainnet ^ 
+-ethUrl=<YOUR ARB RPC> ^
+-serviceAddr=<YOUR BROADCASTER PUBLIC IP ADDRESS>:8935 ^ 
+-broadcaster ^
+-ethPassword=<YOUR PASSWORD> ^
+-maxPricePerUnit=300 ^
+-pricePerUnit=1 ^
+-monitor ^ 
+-v=6 ^
+-rtmpAddr=0.0.0.0:1935 ^ 
+-httpAddr=0.0.0.0:8935 ^
+-blockPollingInterval=20 ^
+
 
 PAUSE
 ```
