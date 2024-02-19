@@ -5,37 +5,56 @@ icon: download
 
 # Install & Configure Docker
 
+## Key folder structure
 
-If an older version of docker is installed remove it with the following command:
+Livepeer will require files to be placed on the host and within the docker
+container. Here is a list of the key folders used by the docker install.
+
+### Host Folders
+
+By default, docker will store all volumes in the `/var/lib/docker/volumes`
+directory
+
+This installation will create a volume called: `broadcaster-lpData` and it will
+be located at `/var/lib/docker/volumes/broadcaster-lpData/_data`
+
+### Container Folders
+
+Within the docker container, the volume `broadcaster-lpData` will be mounted at
+`/root/.lpData`
+
+## Install Prerequisites
+
+If docker is already installed, you can skip this step. The installation assumes
+you are running Docker 20.10.x. If an older version of docker is installed
+remove it with the following command:
 
 As the root user (or sudo), run the following:
+
 ```
 apt remove docker*
 ```
+
 Install Docker
+
 ```
 curl https://releases.rancher.com/install-docker/20.10.sh | sh
 ```
+
 Create a Docker volume
+
 ```
 docker volume create broadcaster-lpData
 ```
-Create keystore directory
-```
-mkdir -p /var/lib/docker/volumes/broadcaster-lpData/_data/arbitrum-one-mainnet/keystore/
-```
-Create eth-secret file
-```
-nano -p /var/lib/docker/volumes/broadcaster-lpData/_data/eth-secret.txt
-```
 
-Enter a strong password to secure your Ethereum account and save the file.  This password is used to decrypt the keystore file and access the private key. **Make sure to never share or lose access to either the password or the keystore file.**
+Create Docker Compose file from the root user's home directory _/root/_
 
-Create Docker Compose file
 ```
 nano docker-compose.yml
 ```
+
 Copy and paste the following and save the following
+
 ```
 version: '3.9'
 
@@ -50,6 +69,7 @@ services:
     volumes:
       - broadcaster-lpData:/root/.lpData
     command: '-ethUrl=https://arb1.arbitrum.io/rpc/
+              -ethKeystorePath=/root/.lpData
               -network=arbitrum-one-mainnet
               -cliAddr=broadcaster:7935
               -broadcaster=true
@@ -66,33 +86,90 @@ volumes:
     external: true
 ```
 
-# Start Livepeer Broadcaster
-In this step we need to strat the Broadcaster in the foreground to create an Ethereum account for the Broadcaster.
+# Create Livepeer Broadcaster ETH account
+
+In this step we need to start the Broadcaster in order to create an Ethereum
+account.
+
 ```
 docker compose run -it broadcaster
 ```
-When prompted enter the password you created for the eth-secret.txt file
 
-After you see the message that the Ethereum account has been unlocked, quit Livepeer.
+When prompted for the ETH password, enter a strong password to secure your
+Ethereum account. This password is used to decrypt and access the ETH private
+key. **Make sure to never share or lose access to either the password or the
+keystore file.**
 
+**Note:** _Keep this password handy, we will use it in the following steps._
 
+After you see the message that the Ethereum account has been unlocked, CTRL+C to
+exit the Livepeer docker instance.
 
-# Modify Docker compose file to include eth-secret
+Using the previously created ETH password, create the eth-secret file
+
+```
+nano -p /var/lib/docker/volumes/broadcaster-lpData/_data/eth-secret.txt
+```
+
+# Modify Docker compose file to include eth-secret.txt
+
 ```
 nano docker-compose.yml
 ```
-Add the following command to the file and save
+
+Add the following line below the `-ethKeystorePath` and save
+
 ```
 -ethPassword=/root/.lpData/eth-secret.txt
 ```
+
+Here is the full modified version of the docker-compose.yml file
+
+```
+version: '3.9'
+
+services:
+  broadcaster:
+    image: livepeer/go-livepeer:<RELEASE_VERSION>
+    container_name: "broadcaster"
+    hostname: "broadcaster"
+    ports:
+      - 1935:1935
+      - 8935:8935
+    volumes:
+      - broadcaster-lpData:/root/.lpData
+    command: '-ethUrl=https://arb1.arbitrum.io/rpc/
+              -ethKeystorePath=/root/.lpData
+              -ethPassword=/root/.lpData/eth-secret.txt
+              -network=arbitrum-one-mainnet
+              -cliAddr=broadcaster:7935
+              -broadcaster=true
+              -monitor=true
+              -v=99
+              -blockPollingInterval=20
+              -maxPricePerUnit=300
+              -pixelsPerUnit=1
+              -rtmpAddr=0.0.0.0:1935
+              -httpAddr=0.0.0.0:8935
+              '
+volumes:
+  broadcaster-lpData:
+    external: true
+```
+
 Start Livepeer in the background
+
 ```
 docker compose up -d
 ```
+
 Launch the livepeer_cli
+
 ```
 docker exec -it broadcaster /bin/bash
 livepeer_cli -host broadcaster
 ```
 
-Jump to [Configure the Livepeer Broadcaster](/broadcasters/guides/configure-broadcaster) to finish configuring the Broadcaster
+Jump to
+[Configure Transcoding Options](/broadcasters/guides/transcoding-options) to
+finish configuring the Broadcaster

@@ -498,7 +498,8 @@
 				"broadcasters/guides/docker-install",
 				"broadcasters/guides/linux-install",
 				"broadcasters/guides/windows-install",
-				"broadcasters/guides/configure-broadcaster",
+				"broadcasters/guides/transcoding-options",
+				"broadcasters/guides/fund-broadcaster",
 				"broadcasters/guides/publish-content",
 				"broadcasters/guides/playback-content"
 			],
