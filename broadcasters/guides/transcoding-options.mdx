@@ -44,8 +44,46 @@ Use the following as a template for your json file
 
 ## Modify Docker Config
 
+Create the transcodingOptions.json file. 
+```
+nano -p /var/lib/docker/volumes/broadcaster-lpData/_data/transcodingOptions.json
+```
+Paste the above template and save the file
+```
+nano docker-compose.yml
+```
+Modify Docker compose file to include
+``` 
+-transcodingOptions=/root/.lpData/transcodingOptions.json
+``` 
+below `-pixelsPerUnit=1` and save.
+
 ## Modify Linux Config
 
-## Modify Windows Config
+Create the transcodingOptions.json file. 
+```
+sudo nano /usr/local/bin/lptConfig/transcodingOptions.json
+```
+Paste the above template and save the file
+```
+sudo nano /etc/systemd/system/livepeer.service
+```
+Modify Linux Service file to include 
+```
+-transcodingOptions=/usr/local/bin/lptConfig/transcodingOptions.json \
+```
+ below `-pixelsPerUnit=1` and save.
 
-Save the transcodingOptions.json file in the .lpData directory
+## Modify Windows Config
+Create the transcodingOptions.json file.
+
+Open notepad (or your text editor of choice) paste the template above and save the transcodingOptions.json file in the following location.
+```
+C:\Users\<Your User Name>\.lpData\transcodingOptions.json
+```
+Modify Windows bat file to include 
+```
+-transcodingOptions=C:\Users\<Your User Name>\.lpData\transcodingOptions.json ^
+```
+ below `-pixelsPerUnit=1` and save.
+
