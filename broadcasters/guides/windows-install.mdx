@@ -3,13 +3,15 @@ title: Windows Install
 icon: download
 ---
 
-Download and unzip the Livepeer binary
+## Download and unzip the Livepeer binary
 
 ```
 https://github.com/livepeer/go-livepeer/releases/download/<RELEASE_VERSION>/livepeer-windows-amd64.zip
 
 ```
-Create a bat file to launch Livepeer.  Use the following as a template, adding your personal info and save a .bat file in the same directory as the Livepeer executable.
+## Create a bat file to launch Livepeer.  
+
+Use the following as a template, adding your personal info and save a .bat file in the same directory as the Livepeer executable.
 
 ```
 -livepeer.exe ^
@@ -17,7 +19,7 @@ Create a bat file to launch Livepeer.  Use the following as a template, adding y
 -ethUrl=<YOUR ARB RPC> ^
 -serviceAddr=<YOUR BROADCASTER PUBLIC IP ADDRESS>:8935 ^ 
 -broadcaster ^
--ethPassword=<YOUR PASSWORD> ^
+-ethPassword=C:\Users\YOUR_USER_NAME\.lpData\ethsecret.txt ^
 -maxPricePerUnit=300 ^
 -pricePerUnit=1 ^
 -monitor ^ 
@@ -29,8 +31,13 @@ Create a bat file to launch Livepeer.  Use the following as a template, adding y
 
 PAUSE
 ```
+## Create a file containing your Broadcaster Ethereum password
 
-If you'd like the Broadcaster to start with Windows you can create a System service using [NSSM](https://nssm.cc/) or the Windows Task Scheduler.
+**This password is used to decrypt the keystore file and access the private key. Make sure to never share or lose access to either the password or the keystore file**
+
+In `C:\Users\YOUR_USER_NAME\.lpData` create a txt file named `ethsecret.txt` with the password
+
+*If you'd like the Broadcaster to start with Windows you can create a System service using [NSSM](https://nssm.cc/) or the Windows Task Scheduler.*
 
 Open the Livepeer CLI, then Jump to [Configure Transcoding Options](/broadcasters/guides/transcoding-options) to finish configuring the Broadcaster
 ```
