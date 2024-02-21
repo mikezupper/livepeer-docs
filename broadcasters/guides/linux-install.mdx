@@ -45,7 +45,8 @@ User=root
 Restart=always
 RestartSec=4
 ExecStart=/usr/local/bin/livepeer -network arbitrum-one-mainnet \
--ethUrl=https://arb1.arbitrum.io/rpc/ \
+-ethUrl=<YOUR ARB RPC URL> \
+-cliAddr=127.0.0.7:5935 \
 -ethAcctAddr=<INSERT YOUR BROADCASTER PUBLIC ADDRESS> \
 -ethPassword=/usr/local/bin/lptConfig/node.txt \
 -maxPricePerUnit=300 \
@@ -71,7 +72,7 @@ sudo systemctl enable --now livepeer
 Open the Livepeer CLI
 
 ```
-livepeer_cli
+livepeer_cli -host 127.0.0.1 -http 5935
 ```
 
 Jump to [Configure Transcoding Options](/broadcasters/guides/transcoding-options) to finish configuring the Broadcaster

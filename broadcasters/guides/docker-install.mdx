@@ -142,7 +142,7 @@ services:
               -ethKeystorePath=/root/.lpData
               -ethPassword=/root/.lpData/eth-secret.txt
               -network=arbitrum-one-mainnet
-              -cliAddr=broadcaster:7935
+              -cliAddr=broadcaster:5935
               -broadcaster=true
               -monitor=true
               -v=99
@@ -167,7 +167,7 @@ Launch the livepeer_cli
 
 ```
 docker exec -it broadcaster /bin/bash
-livepeer_cli -host broadcaster
+livepeer_cli -host broadcaster -http 5935
 ```
 
 Jump to
