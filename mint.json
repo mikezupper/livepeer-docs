@@ -333,7 +333,7 @@
 			"url": "https://discord.gg/livepeer"
 		}
 	],
-	"versions": ["Developers", "Delegators", "Orchestrators","Broadcasters"],
+	"versions": ["Developers", "Delegators", "Orchestrators","Gateways"],
 	"topbarCtaButton": {
 		"name": "Dashboard",
 		"url": "https://livepeer.studio"
@@ -494,16 +494,16 @@
 		{
 			"group": "Guides",
 			"pages": [
-				"broadcasters/guides/overview",
-				"broadcasters/guides/docker-install",
-				"broadcasters/guides/linux-install",
-				"broadcasters/guides/windows-install",
-				"broadcasters/guides/transcoding-options",
-				"broadcasters/guides/fund-broadcaster",
-				"broadcasters/guides/publish-content",
-				"broadcasters/guides/playback-content"
+				"gateways/guides/overview",
+				"gateways/guides/docker-install",
+				"gateways/guides/linux-install",
+				"gateways/guides/windows-install",
+				"gateways/guides/transcoding-options",
+				"gateways/guides/fund-gateway",
+				"gateways/guides/publish-content",
+				"gateways/guides/playback-content"
 			],
-			"version": "Broadcasters"
+			"version": "Gateways"
 		},
 		{
 			"group": "Catalyst",

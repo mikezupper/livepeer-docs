@@ -15,13 +15,13 @@ sudo mv livepeer-linux-amd64/* /usr/local/bin/
 ```
 # Generate a new keystore file
 ```
-/usr/local/bin/livepeer -network arbitrum-one-mainnet -ethUrl <ARBITRUM RPC URL> -broadcaster
+/usr/local/bin/livepeer -network arbitrum-one-mainnet -ethUrl <ARBITRUM RPC URL> -gateway
 exit
 ```
 **When generating a new keystore file, the program will prompt you for a password. This password is used to decrypt the keystore file and access the private key. Make sure to never share or lose access to either the password or the keystore file**
 
 
-#  Create a file containing your Broadcaster Ethereum password
+#  Create a file containing your Gateway Ethereum password
 ```
 sudo mkdir /usr/local/bin/lptConfig
 sudo nano /usr/local/bin/lptConfig/node.txt
@@ -74,4 +74,4 @@ Open the Livepeer CLI
 livepeer_cli -host 127.0.0.1 -http 5935
 ```
 
-Jump to [Configure Transcoding Options](/broadcasters/guides/transcoding-options) to finish configuring the Broadcaster
+Jump to [Configure Transcoding Options](/gateways/guides/transcoding-options) to finish configuring the Gateway

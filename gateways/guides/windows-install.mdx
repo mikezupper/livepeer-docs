@@ -14,13 +14,13 @@ https://github.com/livepeer/go-livepeer/releases/download/<RELEASE_VERSION>/live
 Use the following as a template, adding your personal info and save a .bat file in the same directory as the Livepeer executable.
 
 ```
-livepeer.exe -network=arbitrum-one-mainnet -ethUrl=<YOUR ARB RPC> -cliAddr=127.0.0.1:5935 -serviceAddr=<YOUR BROADCASTER PUBLIC IP ADDRESS>:8935 -broadcaster -maxPricePerUnit=300 -pricePerUnit=1 -monitor=true -v=6 -rtmpAddr=0.0.0.0:1935 -httpAddr=0.0.0.0:8935 -blockPollingInterval=20
+livepeer.exe -network=arbitrum-one-mainnet -ethUrl=<YOUR ARB RPC> -cliAddr=127.0.0.1:5935 -serviceAddr=<YOUR GATEWAY PUBLIC IP ADDRESS>:8935 -broadcaster -maxPricePerUnit=300 -pricePerUnit=1 -monitor=true -v=6 -rtmpAddr=0.0.0.0:1935 -httpAddr=0.0.0.0:8935 -blockPollingInterval=20
 
 PAUSE
 ```
-## Start the Livepeer Broadcaster
+## Start the Livepeer Gateway
 
-Start the Livepeer Broadcaster using the .bat file.
+Start the Livepeer Gateway using the .bat file.
 
 When prompted enter and confirm a password. 
 
@@ -28,7 +28,7 @@ When prompted enter and confirm a password.
 
 After confirming your password close the terminal.
 
-## Create a file containing your Broadcaster Ethereum password
+## Create a file containing your Gateway Ethereum password
 
 In `C:\Users\YOUR_USER_NAME\.lpData` create a txt file named `ethsecret.txt` with the password you created in the previous step.
 
@@ -36,8 +36,8 @@ In `C:\Users\YOUR_USER_NAME\.lpData` create a txt file named `ethsecret.txt` wit
 
 Add `-ethPassword=C:\Users\YOUR_USER_NAME\.lpData\ethsecret.txt` to the previously created .bat file
 
-*If you'd like the Broadcaster to start with Windows you can create a System service using [NSSM](https://nssm.cc/) or the Windows Task Scheduler.*
+*If you'd like the Gateway to start with Windows you can create a System service using [NSSM](https://nssm.cc/) or the Windows Task Scheduler.*
 
-Open the Livepeer CLI, then Jump to [Configure Transcoding Options](/broadcasters/guides/transcoding-options) to finish configuring the Broadcaster
+Open the Livepeer CLI, then Jump to [Configure Transcoding Options](/Gateways/guides/transcoding-options) to finish configuring the Gateway
 ```
 livepeer_cli.exe -host 127.0.0.1 -http 5935
